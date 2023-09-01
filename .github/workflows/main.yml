@@ -1,0 +1,29 @@
+name: V45-Tier3-Team-45
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+   types: [opened, synchronize]
+
+jobs:
+  eslint:
+   runs-on: ubuntu-latest
+
+   steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+       node-version: 16
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Prettier
+      run: npm run format
+
+    - name: Run Eslint
+      uses: Maggi64/eslint-plus-action@master
